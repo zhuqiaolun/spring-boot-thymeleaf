@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="layout/root.html">
+<head>
+    <title></title>
+    <base th:href="@{/}">
+</head>
+<body>
+<section layout:fragment="content" th:remove="tag">
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="userMenu">
+                <li class="layui-nav-item " th:each="rm:${roleMenus}" >
+                    <a class="" th:href="@{/{menuUrl}(menuUrl=${#strings.substring(rm.menuUrl, 1)})}" th:text="${rm.menuName}">模块名称</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+                首页-内容主体区域
+            <div th:text="${#httpServletRequest.requestURL}"></div>
+        </div>
+    </div>
+</section>
+
+<section layout:fragment="script" th:remove="tag">
+    <!-- Jqarticle Js -->
+    <script th:src="@{/js/jparticle.min.js}"></script>
+    <script>
+        layui.use('element', function(){
+            var $ = layui.$,element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+            //监听导航点击
+            element.on('nav(userMenu)', function(elem){
+                console.log(elem);
+            });
+        });
+    </script>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="layout/root.html">
+<head>
+    <title>403</title>
+    <base th:href="@{/}">
+</head>
+<body>
+<section layout:fragment="content" th:remove="tag">
+    <div class="layui-body" style="left: 0;">
+        <!-- 内容主体区域 -->
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm12 layui-col-md12 zyl_mar_01">
+                <blockquote class="layui-elem-quote">
+                    <div class="layui-inline" sec:authorize="isAuthenticated()">
+                        没有权限，返回<a th:href="@{/main}">首页</a>
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
